@@ -136,8 +136,6 @@ static void roi_align_forrawd_kernrl_impl(
     const int pooled_width,const int sampling_ratio, const float* bottom_rois, 
     float* top_data)
 {
-    //int n_rois = nthreads / channels / pooled_width / pooled_height;
-
     for (int n = 0; n < n_rois; n++) {
         int index_n = n * channels * pooled_width * pooled_height;
 
@@ -155,8 +153,6 @@ static void roi_align_forrawd_kernrl_impl(
         float roi_width = roi_end_w - roi_start_w;
         float roi_height = roi_end_h - roi_start_h;
 
-        //float roi_width = std::max(roi_end_w - roi_start_w, (float)1.);
-        //float roi_height = std::max(roi_end_h - roi_start_h, (float)1.);
         float bin_size_h = static_cast<float>(roi_height) / static_cast<float>(pooled_height);
         float bin_size_w = static_cast<float>(roi_width) / static_cast<float>(pooled_width);
 
@@ -215,7 +211,6 @@ static void roi_align_forrawd_kernrl_impl(
 
 static void roi_align_forward_kernel(const ncnn::Mat& input, const ncnn::Mat& rois, float spatial_scale, int pooled_height, int pooled_width, int sampling_ratio, float* output)
 {
-
     int num_rois = rois.h;
     int channels = input.c;
     int height = input.h;
@@ -551,8 +546,6 @@ const ncnn::Mat& bases,int sample_ratio, float scale, ncnn::Mat& pred_masks)
         softmax(proposals_nms[i].mask, 0);
         int size = proposals_nms[i].mask.h * proposals_nms[i].mask.w * proposals_nms[i].mask.c;
         std::memcpy(coeffs_ptr, (float*)proposals_nms[i].mask.data, sizeof(float)* size);
-        
-
     }
     
     ncnn::Mat rois;
