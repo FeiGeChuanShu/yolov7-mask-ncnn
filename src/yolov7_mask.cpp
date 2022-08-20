@@ -601,8 +601,8 @@ static int detect_yolov7(const cv::Mat& bgr, std::vector<Object>& objects)
     yolov7.opt.use_vulkan_compute = false;
     // yolov7.opt.use_bf16_storage = true;
 
-    yolov7.load_param("./models/yolov7-mask.param");
-    yolov7.load_model("./models/yolov7-mask.bin");
+    yolov7.load_param("../models/yolov7-mask.param");
+    yolov7.load_model("../models/yolov7-mask.bin");
 
     const int target_size = 640;
     const float prob_threshold = 0.25f;
